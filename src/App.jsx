@@ -1,16 +1,12 @@
-import './App.css'
+import Body from "./Components/Body"
+import { Provider } from "react-redux"
+import appStore from "./Utils/appStore"
 
 function App() {
 
   return (
     <>
-      
-      <div >
-        <p class="text-3xl font-bold underline">
-          Hello Everyone Lets Build some cool stuff with React and Vite
-        </p>
-      </div>
-      
+      <Provider store={appStore}><Body /></Provider>   
     </>
   )
 }
