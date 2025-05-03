@@ -14,64 +14,50 @@ const Header = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch()
+
   const handleSignOut = () => {
-    // Logic to sign out the user
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
         navigate("/");
-
       })
       .catch((error) => {
-        // An error happened.
         console.error("Sign-out error:", error);
       });
   };
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        
         const {uid,email,displayName,photoURL} = user;
-        dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}))
-        navigate("/browse")
-        // ...
+        dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
+        navigate("/browse");
       } else {
-        // User is signed out
-        dispatch(removeUser())
-        navigate("/")
-        // ...
+        dispatch(removeUser());
+        navigate("/");
       }
-      return () =>{
-        unSubscribe()
-        // Clean up the subscription on component unmount
-        // This is important to prevent memory leaks and unwanted behavior
+      return () => {
+        unSubscribe();
       }
     });
-    
-  }, [])
-  return (
-    <div className="absolute top-0 left-0 w-full flex justify-between items-center p-4">
-      {/* Netflix Logo */}
-      <img
-        src={NetFLixLogo}
-        alt="Netflix Logo"
-        className="w-40"
-      />
+  }, [dispatch, navigate]);
 
+  return (
+    <div className="absolute top-0 left-0 w-full flex justify-between items-center p-4 z-20">
+      {/* Netflix Logo */}
+      <img src={NetFLixLogo} alt="Netflix Logo" className="w-40" />
+      
       {/* User Icon + Sign Out */}
-    {user &&  <div className="flex items-center space-x-4">
-        <img
-          src={user.photoURL}
-          alt="User Icon"
-          className="w-10 h-10 rounded-full"
-        />
-        <button
-          onClick={handleSignOut}
-          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded cursor-pointer"
-        >
-          Sign Out
-        </button>
-      </div>}
+      {user && (
+        <div className="flex items-center space-x-4">
+          <img src={user.photoURL} alt="User Icon" className="w-10 h-10 rounded-full" />
+          <button
+            onClick={handleSignOut}
+            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded cursor-pointer"
+          >
+            Sign Out
+          </button>
+        </div>
+      )}
     </div>
   );
 };
