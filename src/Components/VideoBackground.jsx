@@ -19,7 +19,7 @@ const VideoBackground = ({ movieId }) => {
 
       if (trailer) {
         setTrailerKey(trailer.key);
-        console.log('Trailer:', trailer);
+        // console.log('Trailer:', trailer);
       }
     } catch (error) {
       console.error('Error fetching trailer:', error);

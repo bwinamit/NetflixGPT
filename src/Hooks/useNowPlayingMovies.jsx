@@ -9,7 +9,7 @@ const useNowPlayingMovies = ()=>{
     fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
 
     const jsonData = await Data.json()
-    console.log(jsonData.results)
+    // console.log(jsonData.results)
     dispatch(addNowPlayingMovies(jsonData.results))
   } 
 
