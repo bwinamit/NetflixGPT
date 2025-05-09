@@ -1,6 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import Lang from '../Utils/LanguageConstants';
+
+const langMap = {
+  en: 'english',
+  hi: 'hindi',
+  es: 'spanish'
+};
 
 const GptSearchBar = () => {
+  const languageCode = useSelector((store) => store.config.Language);
+  const langKey = langMap[languageCode] || 'english';
+
   return (
     <div className="relative w-full h-screen">
       <img
@@ -12,14 +23,14 @@ const GptSearchBar = () => {
         <form className="flex bg-white rounded-md overflow-hidden shadow-lg">
           <input
             type="text"
-            placeholder="What would you like to watch?"
+            placeholder={Lang[langKey]?.WhatWouldYouLikeToWatch || 'What would you like to watch?'}
             className="px-4 py-2 w-64 text-gray-700 focus:outline-none"
           />
           <button
             type="submit"
             className="px-4 py-2 bg-red-600 text-white font-semibold hover:bg-red-700"
           >
-            Search
+            {Lang[langKey]?.Search || 'Search'}
           </button>
         </form>
       </div>

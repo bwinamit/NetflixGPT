@@ -10,4 +10,10 @@ export const options = {
     }
   };
 
- export const CDN_IMG_URL= "https://image.tmdb.org/t/p/w500" 
+ export const CDN_IMG_URL= "https://image.tmdb.org/t/p/w500"
+ 
+ export const SUPPORTED_LANGUAGES = [
+    { code: 'en', name: 'English' },
+    { code: 'hi', name: 'Hindi' },
+    { code: 'es', name: 'Spanish' },
+  ];
